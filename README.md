@@ -55,3 +55,4 @@ All configuration options are handled via environment variables
 | `PN_YKW2_FRIENDS_GRPC_PORT`          | Port for your friends server gRPC service                                                                           | Yes                                           |
 | `PN_YKW2_FRIENDS_GRPC_API_KEY`       | API key for your friends server gRPC service                                                                        | No (Assumed to be an open gRPC API)           |
 | `PN_YKW2_AES_KEY`                    | AES key from the account server                                                                                     | Yes                                           |
+| `PN_YKW2_HEALTH_CHECK_PORT`          | Port for the UDP health check                                                                                       | No                                            |
