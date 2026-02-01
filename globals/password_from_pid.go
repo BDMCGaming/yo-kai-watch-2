@@ -2,9 +2,10 @@ package globals
 
 import (
 	"context"
+
 	"github.com/PretendoNetwork/nex-go/v2/types"
 
-	pb "github.com/PretendoNetwork/grpc-go/account"
+	pb "github.com/PretendoNetwork/grpc/go/account"
 	"github.com/PretendoNetwork/nex-go/v2"
 	"google.golang.org/grpc/metadata"
 )

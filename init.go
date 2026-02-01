@@ -1,16 +1,16 @@
 package main
 
 import (
+	"crypto/rand"
 	"database/sql"
+	"encoding/hex"
 	"fmt"
 	"os"
 	"strconv"
 	"strings"
-	"crypto/rand"
-	"encoding/hex"
 
-	pb "github.com/PretendoNetwork/grpc-go/account"
-	pbfriends "github.com/PretendoNetwork/grpc-go/friends"
+	pb "github.com/PretendoNetwork/grpc/go/account"
+	pbfriends "github.com/PretendoNetwork/grpc/go/friends"
 	"github.com/PretendoNetwork/plogger-go"
 	"github.com/PretendoNetwork/yo-kai-watch-2/globals"
 	"github.com/joho/godotenv"
@@ -40,16 +40,15 @@ func init() {
 	friendsGRPCPort := os.Getenv("PN_YKW2_FRIENDS_GRPC_PORT")
 	friendsGRPCAPIKey := os.Getenv("PN_YKW2_FRIENDS_GRPC_API_KEY")
 
-
 	kerberosPassword := make([]byte, 0x10)
-    _, err = rand.Read(kerberosPassword)
-    if err != nil {
-        globals.Logger.Error("Error generating Kerberos password")
-        os.Exit(0)
-    }
+	_, err = rand.Read(kerberosPassword)
+	if err != nil {
+		globals.Logger.Error("Error generating Kerberos password")
+		os.Exit(0)
+	}
 
-    globals.KerberosPassword = string(kerberosPassword)
-	
+	globals.KerberosPassword = string(kerberosPassword)
+
 	globals.InitAccounts()
 
 	if strings.TrimSpace(aesKey) == "" {

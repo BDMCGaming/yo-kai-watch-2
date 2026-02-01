@@ -1,8 +1,6 @@
 package nex
 
 import (
-	//"fmt"
-
 	"github.com/PretendoNetwork/nex-go/v2/types"
 	commonnattraversal "github.com/PretendoNetwork/nex-protocols-common-go/v2/nat-traversal"
 	commonsecure "github.com/PretendoNetwork/nex-protocols-common-go/v2/secure-connection"
@@ -13,6 +11,7 @@ import (
 	commonmatchmaking "github.com/PretendoNetwork/nex-protocols-common-go/v2/match-making"
 	commonmatchmakingext "github.com/PretendoNetwork/nex-protocols-common-go/v2/match-making-ext"
 	commonmatchmakeextension "github.com/PretendoNetwork/nex-protocols-common-go/v2/matchmake-extension"
+	commonmessagedelivery "github.com/PretendoNetwork/nex-protocols-common-go/v2/message-delivery"
 	matchmaking "github.com/PretendoNetwork/nex-protocols-go/v2/match-making"
 	matchmakingext "github.com/PretendoNetwork/nex-protocols-go/v2/match-making-ext"
 	matchmakeextension "github.com/PretendoNetwork/nex-protocols-go/v2/matchmake-extension"
@@ -24,9 +23,7 @@ import (
 	messagedelivery "github.com/PretendoNetwork/nex-protocols-go/v2/message-delivery"
 	ranking "github.com/PretendoNetwork/nex-protocols-go/v2/ranking"
 
-	//local_matchmakeextension "github.com/PretendoNetwork/yo-kai-watch-2/nex/matchmake-extension"
 	local_match_making "github.com/PretendoNetwork/yo-kai-watch-2/nex/match_making"
-	local_message_delivery "github.com/PretendoNetwork/yo-kai-watch-2/nex/message_delivery"
 )
 
 // Is this needed? -Ash
@@ -101,14 +98,10 @@ func registerCommonSecureServerProtocols() {
 	globals.SecureEndpoint.RegisterServiceProtocol(matchmakeExtensionProtocol)
 	commonMatchmakeExtensionProtocol := commonmatchmakeextension.NewCommonProtocol(matchmakeExtensionProtocol)
 	commonMatchmakeExtensionProtocol.SetManager(globals.MatchmakingManager)
-	//matchmakeExtensionProtocol.SetHandlerGetFriendNotificationData(getFriendNotificationData)
-	//matchmakeExtensionProtocol.SetHandlerUpdateNotificationData(updateNotificationData)
-	//matchmakeExtensionProtocol.GetPlayingSession = local_matchmakeextension.GetPlayingSession
 
 	messageDeliveryProtocol := messagedelivery.NewProtocol()
 	globals.SecureEndpoint.RegisterServiceProtocol(messageDeliveryProtocol)
-
-	messageDeliveryProtocol.DeliverMessage = local_message_delivery.DeliverMessage
+	commonmessagedelivery.NewCommonProtocol(messageDeliveryProtocol).SetManager(globals.MessagingManager)
 
 	commonMatchmakeExtensionProtocol.CleanupSearchMatchmakeSession = cleanupSearchMatchmakeSessionHandler
 	commonMatchmakeExtensionProtocol.CleanupMatchmakeSessionSearchCriterias = func(searchCriterias types.List[matchmakingtypes.MatchmakeSessionSearchCriteria]) {
