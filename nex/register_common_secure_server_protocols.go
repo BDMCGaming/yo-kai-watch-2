@@ -24,8 +24,8 @@ import (
 	messagedelivery "github.com/PretendoNetwork/nex-protocols-go/v2/message-delivery"
 	ranking "github.com/PretendoNetwork/nex-protocols-go/v2/ranking"
 
-	//local_matchmakeextension "github.com/PretendoNetwork/yo-kai-watch-2/nex/matchmake-extension"
 	local_match_making "github.com/PretendoNetwork/yo-kai-watch-2/nex/match_making"
+	local_matchmakeextension "github.com/PretendoNetwork/yo-kai-watch-2/nex/matchmake_extension"
 	local_message_delivery "github.com/PretendoNetwork/yo-kai-watch-2/nex/message_delivery"
 )
 
@@ -100,6 +100,7 @@ func registerCommonSecureServerProtocols() {
 	matchmakeExtensionProtocol := matchmakeextension.NewProtocol()
 	globals.SecureEndpoint.RegisterServiceProtocol(matchmakeExtensionProtocol)
 	commonMatchmakeExtensionProtocol := commonmatchmakeextension.NewCommonProtocol(matchmakeExtensionProtocol)
+	matchmakeExtensionProtocol.CloseParticipation = local_matchmakeextension.CloseParticipation
 	commonMatchmakeExtensionProtocol.SetManager(globals.MatchmakingManager)
 	//matchmakeExtensionProtocol.SetHandlerGetFriendNotificationData(getFriendNotificationData)
 	//matchmakeExtensionProtocol.SetHandlerUpdateNotificationData(updateNotificationData)
