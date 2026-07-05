@@ -1,8 +1,6 @@
 package matchmake_extension
 
 import (
-	//"fmt"
-
 	"github.com/PretendoNetwork/nex-go/v2"
 	"github.com/PretendoNetwork/nex-go/v2/types"
 	commonglobals "github.com/PretendoNetwork/nex-protocols-common-go/v2/globals"
